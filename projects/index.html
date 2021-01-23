@@ -1,12 +1,22 @@
-////////////////////////////////////////////////////////////////////////
-// ALL YOUR CODE GOES BELOW HERE ///////////////////////////////////////
-
-function createCannon(400, 200, 1, 2, true) {
-    var platform = game.platforms.create(x, y, 'platform');
-    platform.scale.setTo(scaleX || 1, scaleY || 1);
-    platform.body.immovable = immovable || true;
-    return platform;
-}
-
-// ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
-////////////////////////////////////////////////////////////////////////
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Platformer</title>
+        <script src="lib/jquery.min.js"></script>
+        <script src="lib/phaser.min.js"></script>
+        <script src="js/factory/game.js"></script>
+        <script src="js/factory/preload.js"></script>
+        <script src="js/factory/platform.js"></script>
+        <script src="js/factory/collectable.js"></script>
+        <script src="js/factory/cannon.js"></script>
+        <script src="js/factory/player.js"></script>
+        <script src="js/controller/player-manager.js"></script>
+        <script src="js/init/platform.js"></script>
+        <script src="js/init/collectable.js"></script>
+        <script src="js/init/cannon.js"></script>
+        <script src="js/init/player.js"></script>
+    </head>
+    <body>
+        <script src="js/index.js"></script>
+    </body>
+</html>
