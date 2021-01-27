@@ -27,11 +27,8 @@
         // ALL YOUR CODE GOES BELOW HERE ///////////////////////////////////////
         
         // example: 
-        createPlatform(20, 500); //top right
-        createPlatform(500, 500, 70); //first platform
-        createPlatform(300, 700, 0.3); //second one
-        createPlatform(200, 600, 0.3); //third one
-        createPlatform(100, 300, 10); //bottom left
+        
+        createCannon("top", 450);
         
         
         // ALL YOUR CODE GOES ABOVE HERE ///////////////////////////////////////
