@@ -87,18 +87,18 @@
                 
                 positionY = positionY + speedY;
                 
-                moveBoxto(positionX, positionY);
-                if (positionX > boardWidth){
+                moveBoxTo(positionX, positionY);
+                if (positionX > boardWidth - 70){
                     speed = -speed;
                 }
                 if (positionX < 0){
                     speed = -speed;
                 }
-                if (positionY > boardHeight){
-                    speed = -speed;
+                if (positionY > boardHeight - 75){
+                    speedY = -speedY;
                 }
-                if (positionY < 200){
-                    speed = -speed;
+                if (positionY < 0){
+                    speedY = -speedY;
                 }
 			};
 
@@ -111,16 +111,8 @@
                 positionX = 0;
                 points = points + 1;
                 changeBoxText(points);
-                if (speed > 0){
-                    speed = speed + 3;
-                } else if (speed < 0) {
-                    speed = speed -3;
-                }
-                if (speedY >= 0){
-                    speedY = speedY +3;
-                }else if (speedY< 0){
-                    speedY = speedY -3;
-                }
+                speed = speed + 3;
+                speedY = speedY + 3;
             
 			};
 		})();
