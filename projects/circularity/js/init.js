@@ -26,10 +26,10 @@ var init = function (window) {
         // TODO 2 : Create a function that draws a circle 
         // Code to draw a circle
         function drawCircle(){
-        circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
-        physikz.addRandomVelocity(circle, canvas);
-        view.addChild(circle);
-        circles.push(circle);
+            circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+            physikz.addRandomVelocity(circle, canvas);
+            view.addChild(circle);
+            circles.push(circle);
         }
         // TODO 3 / 7 : Call the drawCircle() function 
         for(var e = 0; e < 100; e++){
@@ -49,11 +49,9 @@ var init = function (window) {
             
             // TODO 8 : Iterate over the array
            
-            for( var i = 0; i < circle.length; i++){
-                var eachCircle = circle[i];
-
-                physikz.updatePosition(eachCircle);
-                game.checkCirclePosition(eachCircle);
+            for( var i = 0; i < circles.length; i++){
+                physikz.updatePosition(circles[i]);
+                game.checkCirclePosition(circles[i]);
             }
         }
     
@@ -82,7 +80,7 @@ var init = function (window) {
             }
 
             // YOUR TODO 6 CODE ENDS HERE //////////////////////////
-        
+        }
         
         /////////////////////////////////////////////////////////////
         // --- NO CODE BELOW HERE  --- DO NOT REMOVE THIS CODE --- //
@@ -102,7 +100,7 @@ var init = function (window) {
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if((typeof process !== 'undefined') &&
-    (typeof process.versions.node !== 'undefined')) {
+    (typeof process.versions.node !== 'undefined')){
     // here, export any references you need for tests //
     module.exports = init;
 }
