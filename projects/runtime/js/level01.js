@@ -21,6 +21,24 @@ var level01 = function (window) {
                 { "type": "sawblade", "x": 900, "y": groundY },
             ]
         };
+        for(var i = 0; i < levelData.gameItems.length; i++){
+           var obj = levelData.gameItems[i];
+           var objX = obj.x;
+           var objY = obj.y;
+           var objType =  obj.type;
+
+            if(objType==="sawblade"){
+              createSawblade(objX, objY);
+            } else if (objType ==="enemy"){
+                createEnemy(objX, objY);
+            }else{
+                createReward(objX, objY);
+            }
+            
+
+
+
+        }
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
         game.setDebugMode(true);
