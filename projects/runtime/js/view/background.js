@@ -65,8 +65,8 @@ var background = function (window) {
            // TODO: 5 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
                     var buildingHeight = 300;
                     var building;
-                    var buildingColors = ["Purple", "Purple", "Purple", "Purple", "Purple", "Purple", "Purple"]
-                    var buildingHeightDifferent = [86, 170, 50, 175, 250, 100, 60]
+                    var buildingColors = ["Purple", "Purple", "Purple", "Purple", "Purple", "Purple", "Purple", "Purple", "purple", "Purple", "Purple"]
+                    var buildingHeightDifferent = [86, 170, 150, 175, 250, 100, 160, 100, 69, 84, 30]
                     for (var i = 0; i < 5; ++i) {
                          building = draw.rect(75,buildingHeightDifferent[i],buildingColors[i],'Black',1);
                          building.x = 150*i;
