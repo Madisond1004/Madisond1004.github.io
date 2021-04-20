@@ -23,9 +23,13 @@ var level01 = function (window) {
                 { "type": "enemy", "x": 900, "y": groundY - 500},
                 { "type": "enemy", "x": 900, "y": groundY - 250},
                 { "type": "enemy", "x": 900, "y": groundY - 250},
+                { "type": "reward", "x": 900, "y": groundY - 250},
+                { "type": "trap", "x": 900, "y": groundY - 250},
             ]
         };
 
+
+            /*
         
         for(var i = 0; i < levelData.gameItems.length; i++){
             var gameItemObject = levelData.gameItems[i];
@@ -39,11 +43,7 @@ var level01 = function (window) {
                 createReward(gameItemObject.x, gameItemObject.y);
             }
         };
-                
-
-
-
-        
+              */         
 
             
             window.levelData = levelData;
@@ -52,20 +52,23 @@ var level01 = function (window) {
         
             // TODO 6 and on go here
             // BEGIN EDITING YOUR CODE HERE
-            function createObsticle(){
+            function createSawBlade(x, y){
                 var hitZoneSize = 25;
                 var damageFromObstacle = 10;
                 var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle); 
-                sawBladeHitZone.x = -400;
-                sawBladeHitZone.y = -200;
+                sawBladeHitZone.x = x;
+                sawBladeHitZone.y = y;
                 game.addGameItem(sawBladeHitZone);
             
                 var obstacleImage = draw.bitmap('img/sawblade.png');
                 sawBladeHitZone.addChild(obstacleImage);
-                obstacleImage.x = -1 * hitZoneSize;
-                obstacleImage.y = -1 * hitZoneSize;
+                obstacleImage.x = -25;
+                obstacleImage.y = -25;
             }
 
+            createSawBlade(300, groundY - 150);
+
+            
             
                 function createEnemy(x, y){
                     var enemy = game.createGameItem('enemy',25);
@@ -75,16 +78,18 @@ var level01 = function (window) {
                     enemy.y = y;
                     game.addGameItem(enemy);
                     enemy.onPlayerCollision = function(){
-                    console.log('The enemy has hit Halle');
-                    game.changeIntegrity(-10);
-                    enemy.shrink();
+                        console.log('The enemy has hit Halle');
+                        game.changeIntegrity(-10);
+                        enemy.shrink();
+                    }
+                    enemy.onProjectileCollision = function(){
+                        console.log('Halle has hit the enemy');
+                        game.increaseScore(100);
+                        enemy.shrink();
+                    }
                 }
-                enemy.onProjectileCollision = function(){
-                    console.log('Halle has hit the enemy');
-                    game.increaseScore(100);
-                    enemy.shrink();
-                }
-            }
+
+
             
             function createReward(x,y) {
                 var hitZoneSize = 15;
@@ -98,6 +103,7 @@ var level01 = function (window) {
                 obstacleImage.x = -1 * hitZoneSize;
                 obstacleImage.y = -1 * hitZoneSize;  
                 game.addGameItem(reward);
+
                 reward.onPlayerCollision = function(){
                     console.log('Halle has gathered the reward');
                     game.changeIntegrity(-10);
@@ -107,17 +113,24 @@ var level01 = function (window) {
             }
 
                 function createTrap(x, y){
-                    var hitZoneSize = 15;
-                    var damageFromObstacle = 5;
+                    var hitZoneSize = 25;
+                    var damageFromObstacle = 15;
                     var trapHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
                     trapHitZone.x = x;
                     trapHitZone.y = y;
                     game.addGameItem(trapHitZone);  
-                    var obstacleImage = draw.bitmap('img/trap.png')
+                    var obstacleImage = draw.bitmap('img/hole.png')
                     trapHitZone.addChild(obstacleImage);
-                    obstacleImage.x = -1 * hitZoneSize;
-                    obstacleImage.y = -1 * hitZoneSize;   
+                    obstacleImage.x = -90;
+                    obstacleImage.y = -25;
+                    obstacleImage.scaleX = .25;                    
+                    obstacleImage.scaleY = .25;
+
+
                 }
+
+                createTrap(800, groundY);
+
         // DO NOT EDIT CODE BELOW HERE
     }
 };

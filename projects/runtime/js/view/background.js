@@ -12,7 +12,7 @@ var background = function (window) {
     /*
      * Create a background view for our game application
      */
-    window.opspark.makeBackground = function(app,ground) {
+        window.opspark.makeBackground = function(app,ground) {
         if(!app) {
             throw new Error("Invaid app argument");
         }
@@ -63,13 +63,13 @@ var background = function (window) {
                        
             
            // TODO: 5 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-                    var buildingHeight = 300;
+                    
                     var building;
                     var buildingColors = ["Black", "Purple", "Black", "Purple", "Purple", "Black", "Black", "Purple", "Black", "Purple", "Purple"]
                     var buildingHeightDifferent = [86, 270, 150, 175, 250, 100, 160, 200, 69, 84, 30]
                     for (var i = 0; i < 5; ++i) {
-                         building = draw.rect(170,buildingHeightDifferent[i],buildingColors[i],'White',1);
-                         building.x = 170*i;
+                        building = draw.rect(170,buildingHeightDifferent[i],buildingColors[i],'White',1);
+                        building.x = 170*i;
                         building.y = groundY-buildingHeightDifferent[i];
                         background.addChild(building);
                         buildings.push(building);
