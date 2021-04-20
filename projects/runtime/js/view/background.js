@@ -47,7 +47,7 @@ var background = function (window) {
                 
                 var circle;
                     for(var i=0;i<100;i++) {
-                        circle = draw.circle(1,'white','LightGray',2);
+                        circle = draw.circle(1,'white','Purple',6);
                         circle.x = canvasWidth*Math.random();
                         circle.y = groundY*Math.random();
                         background.addChild(circle);
@@ -120,7 +120,7 @@ var background = function (window) {
 
 
         }
-
+        /* Make a createjs container*/
         background = new createjs.Container();
         background.resize = render;
         background.update = update;

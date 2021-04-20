@@ -16,65 +16,108 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
-                { "type": "sawblade", "x": 100, "y": groundY },
-                { "type": "sawblade", "x": 600, "y": groundY },
-                { "type": "sawblade", "x": 900, "y": groundY },
-                { "type": "sawblade", "x": 900, "y": groundY },
-                { "type": "enemy", "x": 900, "y": groundY },
-                { "type": "enemy", "x": 900, "y": groundY },
-                { "type": "enemy", "x": 900, "y": groundY },
+                { "type": "sawblade", "x": 100, "y": groundY - 120 },
+                { "type": "sawblade", "x": 600, "y": groundY - 120},
+                { "type": "sawblade", "x": 900, "y": groundY - 30},
+                { "type": "sawblade", "x": 900, "y": groundY -150},
+                { "type": "enemy", "x": 900, "y": groundY - 500},
+                { "type": "enemy", "x": 900, "y": groundY - 250},
+                { "type": "enemy", "x": 900, "y": groundY - 250},
             ]
         };
 
         
         for(var i = 0; i < levelData.gameItems.length; i++){
-           var obj = levelData.gameItems[i];
-           var objX = obj.x;
-           var objY = obj.y;
-           var objType =  obj.type;
+            var gameItemObject = levelData.gameItems[i];
+            if (gameItemObject.type === 'sawblade'){
+                createSawBlade(gameItemObject.x, gameItemObject.y);
+            }else if (gameItemObject.type === 'enemy'){
+                createEnemy(gameItemObject.x, gameItemObject.y);
+            } else if (gameItemObject.type === 'trap'){
+                createTrap(gameItemObject.x, gameItemObject.y);
+            }else {
+                createReward(gameItemObject.x, gameItemObject.y);
+            }
+        };
+                
 
-            if(objType==="sawblade"){
-              createSawblade(objX, objY);
-            } else if (objType ==="enemy"){
-                createEnemy(objX, objY);
-            }else{
-                createReward(objX, objY);
+
+
+        
+
+            
+            window.levelData = levelData;
+            // set this to true or false depending on if you want to see hitzones
+            game.setDebugMode(true);
+        
+            // TODO 6 and on go here
+            // BEGIN EDITING YOUR CODE HERE
+            function createObsticle(){
+                var hitZoneSize = 25;
+                var damageFromObstacle = 10;
+                var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle); 
+                sawBladeHitZone.x = -400;
+                sawBladeHitZone.y = -200;
+                game.addGameItem(sawBladeHitZone);
+            
+                var obstacleImage = draw.bitmap('img/sawblade.png');
+                sawBladeHitZone.addChild(obstacleImage);
+                obstacleImage.x = -1 * hitZoneSize;
+                obstacleImage.y = -1 * hitZoneSize;
+            }
+
+            
+                function createEnemy(x, y){
+                    var enemy = game.createGameItem('enemy',25);
+                    var obstacleImage = draw.bitmap('img/enemy.png');
+                    enemy.addChild(obstacleImage);
+                    enemy.x = x;
+                    enemy.y = y;
+                    game.addGameItem(enemy);
+                    enemy.onPlayerCollision = function(){
+                    console.log('The enemy has hit Halle');
+                    game.changeIntegrity(-10);
+                    enemy.shrink();
+                }
+                enemy.onProjectileCollision = function(){
+                    console.log('Halle has hit the enemy');
+                    game.increaseScore(100);
+                    enemy.shrink();
+                }
             }
             
+            function createReward(x,y) {
+                var hitZoneSize = 15;
+                var damageFromObstacle = 5;
+                var rewardHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+                rewardHitZone.x = x;
+                rewardHitZone.y = y;
+                game.addGameItem(rewardHitZone);  
+                var obstacleImage = draw.bitmap('img/reward.png')
+                rewardHitZone.addChild(obstacleImage);
+                obstacleImage.x = -1 * hitZoneSize;
+                obstacleImage.y = -1 * hitZoneSize;  
+                game.addGameItem(reward);
+                reward.onPlayerCollision = function(){
+                    console.log('Halle has gathered the reward');
+                    game.changeIntegrity(-10);
+                    reward.fadeOut();
+                }
 
+            }
 
-
-        }
-
-        
-        window.levelData = levelData;
-        // set this to true or false depending on if you want to see hitzones
-        
-        game.setDebugMode(true);
-        var enemy = game.createGameItem('enemy',25);
-        var redSquare = draw.rect(50,50,'red');
-            redSquare.x = -25;
-            redSquare.y = -25;
-            enemy.addChild(redSquare);
-            enemy.x = 400;
-            enemy.y = groundY-50; 
-          
-        game.addGameItem(enemy);
-
-
-        // TODO 6 and on go here
-        // BEGIN EDITING YOUR CODE HERE
-        function createObsticle(){
-        var hitZoneSize = 25;
-        var damageFromObstacle = 10;
-        var sawBladeHitZone = game.createObstacle(hitZoneSize, damageFromObstacle); 
-            sawBladeHitZone.x = -400;
-            sawBladeHitZone.y = -200;
-            game.addGameItem(sawBladeHitZone);
-        
-        var obstacleImage = draw.bitmap('img/sawblade.png');
-            sawBladeHitZone.addChild(obstacleImage);
-        }
+                function createTrap(x, y){
+                    var hitZoneSize = 15;
+                    var damageFromObstacle = 5;
+                    var trapHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
+                    trapHitZone.x = x;
+                    trapHitZone.y = y;
+                    game.addGameItem(trapHitZone);  
+                    var obstacleImage = draw.bitmap('img/trap.png')
+                    trapHitZone.addChild(obstacleImage);
+                    obstacleImage.x = -1 * hitZoneSize;
+                    obstacleImage.y = -1 * hitZoneSize;   
+                }
         // DO NOT EDIT CODE BELOW HERE
     }
 };
