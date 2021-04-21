@@ -64,6 +64,43 @@ var level01 = function (window) {
                 sawBladeHitZone.addChild(obstacleImage);
                 obstacleImage.x = -25;
                 obstacleImage.y = -25;
+
+
+                var obstacleImage = draw.bitmap('img/sawblade.png');
+                sawBladeHitZone.addChild(obstacleImage);
+                obstacleImage.x = 300;
+                obstacleImage.y = 19;
+                
+
+                var obstacleImage = draw.bitmap('img/sawblade.png');
+                sawBladeHitZone.addChild(obstacleImage);
+                obstacleImage.x = 600;
+                obstacleImage.y = -25;
+
+                var obstacleImage = draw.bitmap('img/sawblade.png');
+                sawBladeHitZone.addChild(obstacleImage);
+                obstacleImage.x = 690;
+                obstacleImage.y = 20;
+
+                var obstacleImage = draw.bitmap('img/sawblade.png');
+                sawBladeHitZone.addChild(obstacleImage);
+                obstacleImage.x = 1900;
+                obstacleImage.y = -25;
+
+                var obstacleImage = draw.bitmap('img/sawblade.png');
+                sawBladeHitZone.addChild(obstacleImage);
+                obstacleImage.x = 1000;
+                obstacleImage.y = -95;
+
+                var obstacleImage = draw.bitmap('img/sawblade.png');
+                sawBladeHitZone.addChild(obstacleImage);
+                obstacleImage.x = 1600;
+                obstacleImage.y = 19;
+
+                var obstacleImage = draw.bitmap('img/sawblade.png');
+                sawBladeHitZone.addChild(obstacleImage);
+                obstacleImage.x = 2000;
+                obstacleImage.y = 18;
             }
 
             createSawBlade(300, groundY - 150);
@@ -122,6 +159,13 @@ var level01 = function (window) {
                     var obstacleImage = draw.bitmap('img/hole.png')
                     trapHitZone.addChild(obstacleImage);
                     obstacleImage.x = -90;
+                    obstacleImage.y = -25;
+                    obstacleImage.scaleX = .25;                    
+                    obstacleImage.scaleY = .25;
+
+                    var obstacleImage = draw.bitmap('img/hole.png')
+                    trapHitZone.addChild(obstacleImage);
+                    obstacleImage.x = 900;
                     obstacleImage.y = -25;
                     obstacleImage.scaleX = .25;                    
                     obstacleImage.scaleY = .25;
