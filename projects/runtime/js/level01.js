@@ -16,20 +16,26 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
-                { "type": "sawblade", "x": 100, "y": groundY - 120 },
-                { "type": "sawblade", "x": 600, "y": groundY - 120},
-                { "type": "sawblade", "x": 900, "y": groundY - 30},
-                { "type": "sawblade", "x": 900, "y": groundY -150},
-                { "type": "enemy", "x": 900, "y": groundY - 500},
-                { "type": "enemy", "x": 900, "y": groundY - 250},
-                { "type": "enemy", "x": 900, "y": groundY - 250},
-                { "type": "reward", "x": 900, "y": groundY - 250},
+                { "type": "sawblade", "x": 290, "y": groundY - 120 },
+                { "type": "sawblade", "x": 1900, "y": groundY - 120},
+                { "type": "sawblade", "x": 1400, "y": groundY - 30},
+                { "type": "sawblade", "x": 1090, "y": groundY -150},
+                { "type": "sawblade", "x": 170, "y": groundY -150},
+                { "type": "sawblade", "x": 1600, "y": groundY -150},
+                { "type": "sawblade", "x": 1030, "y": groundY -150},
+                { "type": "sawblade", "x": 2000, "y": groundY -150},
+                { "type": "enemy", "x": 1000, "y": groundY - 200},
+                { "type": "enemy", "x": 500, "y": groundY - 250},
+                { "type": "enemy", "x": 200, "y": groundY - 250},
+                { "type": "reward", "x": 1400, "y": groundY - 150},
+                { "type": "reward", "x": 1600, "y": groundY - 150},
                 { "type": "trap", "x": 900, "y": groundY - 250},
+                 { "type": "trap", "x": 1900, "y": groundY - 250},
             ]
         };
 
 
-            /*
+            
         
         for(var i = 0; i < levelData.gameItems.length; i++){
             var gameItemObject = levelData.gameItems[i];
@@ -43,7 +49,7 @@ var level01 = function (window) {
                 createReward(gameItemObject.x, gameItemObject.y);
             }
         };
-              */         
+                    
 
             
             window.levelData = levelData;
@@ -64,43 +70,6 @@ var level01 = function (window) {
                 sawBladeHitZone.addChild(obstacleImage);
                 obstacleImage.x = -25;
                 obstacleImage.y = -25;
-
-
-                var obstacleImage = draw.bitmap('img/sawblade.png');
-                sawBladeHitZone.addChild(obstacleImage);
-                obstacleImage.x = 300;
-                obstacleImage.y = 19;
-                
-
-                var obstacleImage = draw.bitmap('img/sawblade.png');
-                sawBladeHitZone.addChild(obstacleImage);
-                obstacleImage.x = 600;
-                obstacleImage.y = -25;
-
-                var obstacleImage = draw.bitmap('img/sawblade.png');
-                sawBladeHitZone.addChild(obstacleImage);
-                obstacleImage.x = 690;
-                obstacleImage.y = 20;
-
-                var obstacleImage = draw.bitmap('img/sawblade.png');
-                sawBladeHitZone.addChild(obstacleImage);
-                obstacleImage.x = 1900;
-                obstacleImage.y = -25;
-
-                var obstacleImage = draw.bitmap('img/sawblade.png');
-                sawBladeHitZone.addChild(obstacleImage);
-                obstacleImage.x = 1000;
-                obstacleImage.y = -95;
-
-                var obstacleImage = draw.bitmap('img/sawblade.png');
-                sawBladeHitZone.addChild(obstacleImage);
-                obstacleImage.x = 1600;
-                obstacleImage.y = 19;
-
-                var obstacleImage = draw.bitmap('img/sawblade.png');
-                sawBladeHitZone.addChild(obstacleImage);
-                obstacleImage.x = 2000;
-                obstacleImage.y = 18;
             }
 
             createSawBlade(300, groundY - 150);
@@ -120,6 +89,8 @@ var level01 = function (window) {
                         enemy.shrink();
                     }
                     enemy.onProjectileCollision = function(){
+                        enemy.velocityX = 1;
+                        enemy.velocityY = 2;
                         console.log('Halle has hit the enemy');
                         game.increaseScore(100);
                         enemy.shrink();
@@ -135,10 +106,12 @@ var level01 = function (window) {
                 rewardHitZone.x = x;
                 rewardHitZone.y = y;
                 game.addGameItem(rewardHitZone);  
-                var obstacleImage = draw.bitmap('img/reward.png')
+                var obstacleImage = draw.bitmap('img/Reward.png')
                 rewardHitZone.addChild(obstacleImage);
                 obstacleImage.x = -1 * hitZoneSize;
-                obstacleImage.y = -1 * hitZoneSize;  
+                obstacleImage.y = -1 * hitZoneSize;
+                obstacleImage.scaleX = .4;
+                obstacleImage.scaleY = .4;  
                 game.addGameItem(reward);
 
                 reward.onPlayerCollision = function(){
@@ -162,15 +135,6 @@ var level01 = function (window) {
                     obstacleImage.y = -25;
                     obstacleImage.scaleX = .25;                    
                     obstacleImage.scaleY = .25;
-
-                    var obstacleImage = draw.bitmap('img/hole.png')
-                    trapHitZone.addChild(obstacleImage);
-                    obstacleImage.x = 900;
-                    obstacleImage.y = -25;
-                    obstacleImage.scaleX = .25;                    
-                    obstacleImage.scaleY = .25;
-
-
                 }
 
                 createTrap(800, groundY);

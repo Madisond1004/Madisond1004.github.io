@@ -78,10 +78,11 @@ var background = function (window) {
                     
              //TODO 4: Part 1 - Add a tree
                 tree = draw.bitmap('img/tree.png');
-                tree.x = 175;
+                tree.x = 75;
                 tree.y = groundY - 250;
                 background.addChild(tree);
-                 
+                tree.scaleX = .7;
+                tree.scaleY = .7; 
        
         }
         
