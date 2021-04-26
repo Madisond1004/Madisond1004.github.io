@@ -16,32 +16,36 @@ var level01 = function (window) {
             "number": 1, 
             "speed": -3,
             "gameItems": [
-                { "type": "enemy", "x": 1000, "y": groundY - 90},
-                { "type": "enemy", "x": 1500, "y": groundY - 90},
-                { "type": "enemy", "x": 1200, "y": groundY - 90},
-                { "type": "enemy", "x": 1100, "y": groundY - 90},
-                { "type": "enemy", "x": 1800, "y": groundY - 90},
-                { "type": "enemy", "x": 4000, "y": groundY - 90},
-                { "type": "sawblade", "x": 290, "y": groundY - 120},
-                { "type": "sawblade", "x": 1900, "y": groundY - 120},
-                { "type": "sawblade", "x": 1400, "y": groundY - 30},
-                { "type": "sawblade", "x": 1090, "y": groundY - 150},
-                { "type": "sawblade", "x": 1170, "y": groundY - 30},
-                { "type": "sawblade", "x": 1600, "y": groundY - 150},
-                { "type": "sawblade", "x": 1030, "y": groundY - 150},
-                { "type": "sawblade", "x": 2000, "y": groundY - 30},
-                { "type": "sawblade", "x": 2080, "y": groundY - 150},
-                { "type": "sawblade", "x": 2090, "y": groundY - 100},
-                { "type": "sawblade", "x": 2900, "y": groundY - 30},
-                { "type": "sawblade", "x": 3000, "y": groundY - 100},
-                { "type": "sawblade", "x": 3900, "y": groundY - 30},
-                { "type": "sawblade", "x": 4000, "y": groundY - 30},
-                { "type": "reward", "x": 1800, "y": groundY - 60},
-                { "type": "reward", "x": 1900, "y": groundY - 90},
-                { "type": "reward", "x": 2010, "y": groundY - 60},
-                { "type": "trap", "x": 1800, "y": groundY - 90},
-                { "type": "trap", "x": 1900, "y": groundY - 90},
-                { "type": "trap", "x": 1010, "y": groundY - 150},
+                { "type": "enemy", "x": 2000, "y": groundY - 80},
+                { "type": "enemy", "x": 3500, "y": groundY - 80},
+                { "type": "enemy", "x": 1200, "y": groundY - 80},
+                { "type": "enemy", "x": 1100, "y": groundY - 80},
+                { "type": "enemy", "x": 2800, "y": groundY - 80},
+                { "type": "enemy", "x": 3090, "y": groundY - 80},
+                { "type": "enemy", "x": 4190, "y": groundY - 80},
+                { "type": "enemy", "x": 3190, "y": groundY - 80},
+                { "type": "sawblade", "x": 2800, "y": groundY - 120},
+                { "type": "sawblade", "x": 3080, "y": groundY - 120},
+                { "type": "sawblade", "x": 1000, "y": groundY - 10},
+                { "type": "sawblade", "x": 2010, "y": groundY - 150},
+                { "type": "sawblade", "x": 3800, "y": groundY - 10},
+                { "type": "sawblade", "x": 3200, "y": groundY - 150},
+                { "type": "sawblade", "x": 1700, "y": groundY - 10},
+                { "type": "sawblade", "x": 2200, "y": groundY - 10},
+                { "type": "sawblade", "x": 3091, "y": groundY - 10},
+                { "type": "sawblade", "x": 2700, "y": groundY - 10},
+                { "type": "sawblade", "x": 3300, "y": groundY - 10},
+                { "type": "sawblade", "x": 2300, "y": groundY - 100},
+                { "type": "sawblade", "x": 1390, "y": groundY - 100},
+                { "type": "sawblade", "x": 1400, "y": groundY - 100},
+                { "type": "reward", "x": 3400, "y": groundY - 90},  
+                { "type": "reward", "x": 1500, "y": groundY - 90},
+                { "type": "reward", "x": 2610, "y": groundY - 90}, 
+                { "type": "reward", "x": 3090, "y": groundY - 90},
+                { "type": "reward", "x": 3000, "y": groundY - 90},
+                { "type": "trap", "x": 9900, "y": groundY -30},
+                { "type": "trap", "x": 1000, "y": groundY - 30},
+                { "type": "trap", "x": 700, "y": groundY - 30},   
             ]
         };
 
@@ -83,17 +87,23 @@ var level01 = function (window) {
                 obstacleImage.y = -25;
             }
 
-            createSawBlade(300, groundY - 150);
 
             
             
                 function createEnemy(x, y){
-                    var enemy = game.createGameItem('enemy',25);
-                    var obstacleImage = draw.bitmap('img/enemy.png');
-                    enemy.addChild(obstacleImage);
+                     var hitZoneSize = 50;
+                    var damageFromObstacle = 0;
+                    var enemy = game.createObstacle(hitZoneSize, damageFromObstacle);
                     enemy.x = x;
                     enemy.y = y;
+                    game.addGameItem(enemy);  
+                    
+                    var obstacleImage = draw.bitmap('img/enemy.png')
+                    enemy.addChild(obstacleImage);
+                    obstacleImage.x = -25;
+                    obstacleImage.y = -80;
                     game.addGameItem(enemy);
+                          
                     enemy.velocityX = - 1;
                     enemy.onPlayerCollision = function(){
                         console.log('The enemy has hit Halle');
@@ -113,28 +123,29 @@ var level01 = function (window) {
             function createReward(x,y) {
                 var hitZoneSize = 15;
                 var damageFromObstacle = 5;
-                var rewardHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
-                rewardHitZone.x = x;
-                rewardHitZone.y = y;
-                game.addGameItem(rewardHitZone);  
+                var reward = game.createObstacle(hitZoneSize, damageFromObstacle);
+                reward.x = x;
+                reward.y = y;
+                game.addGameItem(reward);  
+                
                 var obstacleImage = draw.bitmap('img/Reward.png')
-                rewardHitZone.addChild(obstacleImage);
-                obstacleImage.x = -1 * hitZoneSize;
-                obstacleImage.y = -1 * hitZoneSize;
+                reward.addChild(obstacleImage);
+                obstacleImage.x = -25;
+                obstacleImage.y = -25;
                 obstacleImage.scaleX = .4;
                 obstacleImage.scaleY = .4;  
                 game.addGameItem(reward);
 
                 reward.onPlayerCollision = function(){
                     console.log('Halle has gathered the Reward');
-                    game.changeIntegrity(-10);
+                    game.changeIntegrity(+10);
                     reward.fadeOut();
                 }
 
             }
 
                 function createTrap(x, y){
-                    var hitZoneSize = 25;
+                    var hitZoneSize = 15;
                     var damageFromObstacle = 15;
                     var trapHitZone = game.createObstacle(hitZoneSize, damageFromObstacle);
                     trapHitZone.x = x;
@@ -142,11 +153,12 @@ var level01 = function (window) {
                     game.addGameItem(trapHitZone);  
                     var obstacleImage = draw.bitmap('img/hole.png')
                     trapHitZone.addChild(obstacleImage);
-                    obstacleImage.x = -90;
+                    obstacleImage.x = -130;
                     obstacleImage.y = -25;
+                    obstacleImage.scaleX = .4;
+                    obstacleImage.scaleY = .4;  
                 }
 
-                createTrap(800, groundY);
 
         // DO NOT EDIT CODE BELOW HERE
     }
